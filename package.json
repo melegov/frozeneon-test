@@ -1,0 +1,21 @@
+{
+  "name": "nethernite",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "moment": "^2.29.3",
+    "vue": "^3.2.36",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "sass": "^1.52.3",
+    "vite": "^2.9.9"
+  }
+}
