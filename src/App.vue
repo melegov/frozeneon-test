@@ -7,12 +7,10 @@ import Header from '@/components/Header.vue';
 import usePackages from '@/composables/usePackages';
 import Spiner from '@/components/Spiner.vue';
 import Modal from '@/components/Modal.vue';
-import useModal from './composables/useModal';
-import { computed } from '@vue/reactivity';
+import useModal from '@/composables/useModal';
 
-const { packages, isLoading, selectedPackage, getVersions, getTags, getFiles } = usePackages();
+const { packages, isLoading, selectedPackage, getVersions, getTags, getFiles, clickPackage } = usePackages();
 const { modalIsShow } = useModal();
-
 
 </script>
 
@@ -29,7 +27,9 @@ const { modalIsShow } = useModal();
         :description="item.description" 
         :version="item.version"
         :date="item.date"
-        :keywords="item.keywords">
+        :keywords="item.keywords"
+        @click="clickPackage(item)"
+        >
     </PackageCard>
   </PackageList>
   <Pagination v-show="!isLoading && packages.length" class="mt-2"></Pagination>

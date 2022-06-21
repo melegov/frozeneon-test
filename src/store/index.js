@@ -4,6 +4,8 @@ const SEARCH_API_URL = 'https://registry.npmjs.com';
 const API_URL = 'https://data.jsdelivr.com/v1/package/npm/';
 const PER_PAGE = 10;
 
+let controller = null;
+
 export default createStore({
     state: {
         packages: [],
@@ -67,9 +69,17 @@ export default createStore({
                 popularity: 0.5
             });
 
-            const response = await fetch(SEARCH_API_URL + "/-/v1/search?" + params.toString())
+            if (controller) {
+                controller.abort();
+            }
+            controller = new AbortController();
+            const response = await fetch(SEARCH_API_URL + "/-/v1/search?" + params.toString(), {
+                signal: controller.signal
+              })
                 .catch((error) => console.log(error));
-
+            
+            controller = null;
+            if (!response) { return; }
             const packagesResponse = await response.json();
 
             commit("SET_TOTAL", packagesResponse.total);

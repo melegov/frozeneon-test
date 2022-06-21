@@ -24,11 +24,16 @@ export default () => {
         }
     });
 
+    function clickPackage(packageData) {
+        store.dispatch('fetchPackageDetails', packageData);
+    }
+
     return {
         packages: computed(() => store.state.packages),
         isLoading: computed(() => store.state.isLoading),
         selectedPackage: computed(() => store.state.selectedPackage),
         getVersions,
+        clickPackage,
         getTags,
         getFiles
     }
